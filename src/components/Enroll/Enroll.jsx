@@ -135,7 +135,7 @@ ID этой записи: \`${id}\`
 				<title>{t('title')}</title>
 				<meta name="description" content={t('description')} />
 			</Helmet>
-			<div className="wrapper dev">
+			<div className="wrapper">
 					<form className="form__content" onSubmit={(e) => {
 							e.preventDefault()
 							send()
