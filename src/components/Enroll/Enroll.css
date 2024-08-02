@@ -66,6 +66,7 @@
 }
 .form__label.req {
 	margin-bottom: 20px;
+	border: 1px var(--tg-theme-destructive-text-color) solid;
 }
 .form__label.req::after {
 	color: var(--tg-theme-destructive-text-color);
