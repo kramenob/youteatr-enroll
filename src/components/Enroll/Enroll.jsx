@@ -1,13 +1,28 @@
+/** @jsxImportSource @emotion/react */
+import { css } from '@emotion/react';
 import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from 'react-helmet';
 
 import "./Enroll.css"
 
+const content = (content) => css`
+  &.req::after {
+    content: '${content}';
+  }
+`
+
 function Enroll(props) {
 	const { t, i18n } = useTranslation()
 	const [selectedLanguage, setSelectedLanguage] = useState(i18n.language)
-	
+	const [errors, setErrors] = useState({
+		parentName: false,
+		email: false,
+		phone: false,
+		childName: false,
+		childAge: false,
+	});
+
 	useEffect(() => {
 		if (props.lang) {
 		  i18n.changeLanguage(props.lang);
@@ -104,8 +119,10 @@ ID этой записи: \`${id}\`
 				  .catch((error) => {
 					console.error('Error:', error);
 				  });
-				  alert(t("form.form_15"))
-				  window.location.reload()
+				  document.querySelector(".success").classList.add("ok")
+				  setTimeout(() => {
+					window.location.reload();
+				  }, 5000);
 		}
 
 	}
@@ -113,27 +130,56 @@ ID этой записи: \`${id}\`
 	const fullFormMode = () => {
 		let res = true
 
+		const newErrors = {
+			parentName: false,
+			email: false,
+			phone: false,
+			childName: false,
+			childAge: false,
+		};
+
 		if (parentName.current.value.length < 2) {
-			alert(t("form.form_9"));
+			newErrors.parentName = true;
 			res = false
-		} else if (emailTest()) {
-			alert(t("form.form_10"))
+		} else {
+			newErrors.parentName = false;
+		}
+		if (emailTest()) {
+			newErrors.email = true;
 			res = false
-		} else if (checkPhone()) {
-			alert(t("form.form_11"))
-			res = false
-		} else if (childName.current.value.length < 2) {
-			alert(t("form.form_12"));
-			res = false
-		} else if (childAge.current.value < 1) {
-			alert(t("form.form_13"));
-			res = false
-		} else if (!(childAge.current.value >= 7 && childAge.current.value <= 15)) {
-			alert(t("form.form_14"));
-			res = false
+		} else {
+			newErrors.email = false;
 		}
 
-		console.log("sent");
+		if (checkPhone()) {
+			newErrors.phone = true;
+			res = false
+		} else {
+			newErrors.phone = false;
+		}
+
+		if (childName.current.value.length < 2) {
+			newErrors.childName = true;
+			res = false
+		} else {
+			newErrors.childName = false;
+		}
+
+		if (childAge.current.value < 1) {
+			newErrors.childAge = true;
+			res = false
+		} else {
+			newErrors.childAge = false;
+		}
+		
+		if (!(childAge.current.value >= 7 && childAge.current.value <= 15)) {
+			newErrors.childAge = true;
+			res = false
+		} else {
+			newErrors.childAge = false;
+		}
+
+		setErrors(newErrors);
 		
 		return res
 	}
@@ -186,12 +232,10 @@ ID этой записи: \`${id}\`
 						}}>
 						<span className="form_title" color="text">{t("form.form_1")}</span>
 						<div className="grid form__inputs">
-							<label className="form__label" id="for-parent-name">
+							<label className={`form__label ${errors.parentName ? 'req' : ''}`} css={content(t("form.form_9"))} id="for-parent-name">
 								<input
 									ref={parentName}
 									type="text"
-
-									color="text"
 
 									id="parent-name"
 									className="form__input"
@@ -203,12 +247,10 @@ ID этой записи: \`${id}\`
 									maxLength="20"
 								/>
 							</label>
-							<label className="form__label form__label--addition" id="for-email">
+							<label className={`form__label ${errors.email ? 'req' : ''}`} css={content(t("form.form_10"))} id="for-email">
 								<input
 									ref={eMail}
 									type="text"
-
-									color="text"
 
 									id="email"
 									className="form__input"
@@ -220,12 +262,10 @@ ID этой записи: \`${id}\`
 									maxLength="50"
 								/>
 							</label>
-							<label className="form__label form__label--addition" id="for-phone">
+							<label className={`form__label ${errors.phone ? 'req' : ''}`} css={content(t("form.form_11"))} id="for-phone">
 								<input
 									ref={phone}
 									type="tel"
-
-									color="text"
 
 									id="phone"
 									className="form__input"
@@ -237,12 +277,10 @@ ID этой записи: \`${id}\`
 									maxLength="20"
 								/>
 							</label>
-							<label className="form__label" id="for-child-name">
+							<label className={`form__label ${errors.childName ? 'req' : ''}`} css={content(t("form.form_12"))} id="for-child-name">
 								<input
 									ref={childName}
 									type="text"
-
-									color="text"
 
 									id="child-name"
 									className="form__input"
@@ -254,12 +292,10 @@ ID этой записи: \`${id}\`
 									maxLength="20"
 								/>
 							</label>
-							<label className="form__label form__label--addition" id="for-child-age">
+							<label className={`form__label ${errors.childAge ? 'req' : ''}`} css={content(t("form.form_13"))} id="for-child-age">
 								<input
 									ref={childAge}
 									type="number"
-
-									color="text"
 
 									id="child-age"
 									className="form__input"
@@ -282,6 +318,12 @@ ID этой записи: \`${id}\`
 						<span className="note">{t('form.form_16')}</span>
 						<div className="buttons">
 							{translations(selectedLanguage)}
+						</div>
+					</section>
+					<section className="success ok">
+						<div className="box">
+							<span>Заявка успешно отправлена.</span>
+							<span>В скором времени мы с вами свяжемся, пожалуйста ожидайте!</span>
 						</div>
 					</section>
 			</div>

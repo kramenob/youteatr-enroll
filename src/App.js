@@ -16,6 +16,7 @@ function App() {
 			const hint_color = themeParams.hint_color || 'rgb(0, 0, 0, 0.5)'
 			const button_text_color = themeParams.button_text_color || '#FFFFFF'
 			const button_color = themeParams.button_color || '#48B3A9'
+			const destructive_text_color = themeParams.destructive_text_color || '#48B3A9'
 
 			document.documentElement.style.setProperty('--tg-theme-bg-color', bg_color);
 			document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', sec_bg_color);
@@ -23,6 +24,7 @@ function App() {
 			document.documentElement.style.setProperty('--tg-theme-hint-color', hint_color);
 			document.documentElement.style.setProperty('--tg-theme-button-text-color', button_text_color);
 			document.documentElement.style.setProperty('--tg-theme-button-color', button_color);
+			document.documentElement.style.setProperty('--tg-theme-destructive-text-color', destructive_text_color);
 		};
 
 		// Set initial theme
