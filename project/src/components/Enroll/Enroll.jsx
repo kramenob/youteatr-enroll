@@ -9,8 +9,8 @@ function Enroll(props) {
 	i18n.changeLanguage(props.lang)
 
 	const
-		telegramBotToken = "7031033842:AAFb5_SIvn8fvWp4ynULN462kpbmvB2wozY", // process.env.REACT_APP_TELEGRAM_BOT_TOKEN,
-		telegramChatId = -1002197975269, // process.env.REACT_APP_TELEGRAM_CHAT_ID,
+		telegramBotToken = process.env.REACT_APP_TELEGRAM_BOT_TOKEN,
+		telegramChatId = process.env.REACT_APP_TELEGRAM_CHAT_ID,
 		url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?parse_mode=Markdown`,
 		
 		parentName = useRef(null),
