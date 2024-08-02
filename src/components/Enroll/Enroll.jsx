@@ -274,7 +274,7 @@ ID этой записи: \`${id}\`
 							<span className="form__notice mob-form-hidden">{t("form.form_8")}</span>
 						</div>
 					</form>
-					<hr className="devider" />
+					<div className="devider" ></div>
 					<section className="language-switcher">
 						<span className="note">Выбрать другой язык:</span>
 						<div className="buttons">
