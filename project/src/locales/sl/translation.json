@@ -1,0 +1,28 @@
+{
+	"title": "«⅄OU!» | Gledališki in umetniški studio v centru Ljubljane",
+	"description": "Gledališko-umetniški studio «⅄OU!» v centru Ljubljane na Kotnikovi 4. Igralska igra za otroke 7-12 let. Usposabljanje v ruskem, slovenskem in angleškem jeziku. Začnemo 1. septembra. Vpisi v skupine do 20.08.",
+	"discount" : 10,
+	"temp": "/img/sl/mob-temp.jpg",
+	"form": {
+		"form_1": "Prijavite se na tečaj",
+		"form_2": "Tvoje ime",
+		"form_3": "E-Mail",
+		"form_4": "Telefon",
+		"form_5": "Ime otroka",
+		"form_6": "Otrokova starost",
+		"form_7": "Pridruži se brezplačno",
+		"form_8": "Z oddajo prijave s klikom na gumb soglašate z obdelavo osebnih podatkov s strani Studia «⅄OU!»",
+		"form_9": "Prosim vnesite svoje ime.",
+		"form_10": "Preverite, ali je e-poštni naslov, ki ste ga vnesli, pravilen.",
+		"form_11": "Preverite, ali je telefonska številka, ki ste jo vnesli, pravilna.",
+		"form_12": "Vnesite ime svojega otroka.",
+		"form_13": "Vnesite starost vašega otroka.",
+		"form_14": "Opravičujemo se, vendar v skupine zbiramo otroke od 7 do 15 let.",
+		"form_15": "Vloga je poslana. Kmalu vas bomo kontaktirali!"
+	},
+    "slide_1": {
+        "text_1_1" : "Gledališki in umetniški studio v centru Ljubljane",
+		"text_1_2": "Tečaj igralstva za otroke od 7 do 12 let",
+		"text_1_3": "popust na šolnino ob prijavi pred 31.07.24"
+    }
+}
