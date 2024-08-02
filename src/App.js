@@ -11,12 +11,14 @@ function App() {
 
 		const setTheme = (themeParams) => {
 			const bg_color = themeParams.bg_color || '#FFFFFF'
+			const sec_bg_color = themeParams.secondary_bg_color || '#DEDEDE'
 			const text_color = themeParams.text_color || '#000000'
 			const hint_color = themeParams.hint_color || 'rgb(0, 0, 0, 0.5)'
 			const button_text_color = themeParams.button_text_color || '#FFFFFF'
 			const button_color = themeParams.button_color || '#48B3A9'
 
 			document.documentElement.style.setProperty('--tg-theme-bg-color', bg_color);
+			document.documentElement.style.setProperty('--tg-theme-secondary-bg-color', sec_bg_color);
 			document.documentElement.style.setProperty('--tg-theme-text-color', text_color);
 			document.documentElement.style.setProperty('--tg-theme-hint-color', hint_color);
 			document.documentElement.style.setProperty('--tg-theme-button-text-color', button_text_color);
