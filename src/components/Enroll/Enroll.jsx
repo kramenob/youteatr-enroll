@@ -140,12 +140,14 @@ ID этой записи: \`${id}\`
 							e.preventDefault()
 							send()
 						}}>
-						<span className="form_title">{t("form.form_1")}</span>
+						<span className="form_title" color="text">{t("form.form_1")}</span>
 						<div className="grid form__inputs">
 							<label className="form__label" id="for-parent-name">
 								<input
 									ref={parentName}
 									type="text"
+
+									color="text"
 
 									id="parent-name"
 									className="form__input"
@@ -162,6 +164,8 @@ ID этой записи: \`${id}\`
 									ref={eMail}
 									type="text"
 
+									color="text"
+
 									id="email"
 									className="form__input"
 
@@ -176,6 +180,8 @@ ID этой записи: \`${id}\`
 								<input
 									ref={phone}
 									type="tel"
+
+									color="text"
 
 									id="phone"
 									className="form__input"
@@ -192,6 +198,8 @@ ID этой записи: \`${id}\`
 									ref={childName}
 									type="text"
 
+									color="text"
+
 									id="child-name"
 									className="form__input"
 
@@ -206,6 +214,8 @@ ID этой записи: \`${id}\`
 								<input
 									ref={childAge}
 									type="number"
+
+									color="text"
 
 									id="child-age"
 									className="form__input"
