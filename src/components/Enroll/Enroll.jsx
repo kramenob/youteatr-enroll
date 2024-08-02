@@ -99,10 +99,10 @@ ID этой записи: \`${id}\`
 				  })
 				  .then(response => response.json())
 				  .then(data => {
-					// console.log('Success:', data);
+					console.log('Success:', data);
 				  })
 				  .catch((error) => {
-					// console.error('Error:', error);
+					console.error('Error:', error);
 				  });
 				  alert(t("form.form_15"))
 				  window.location.reload()
@@ -132,6 +132,9 @@ ID этой записи: \`${id}\`
 			alert(t("form.form_14"));
 			res = false
 		}
+
+		console.log("sent");
+		
 		return res
 	}
 
@@ -276,7 +279,7 @@ ID этой записи: \`${id}\`
 					</form>
 					<div className="devider" ></div>
 					<section className="language-switcher">
-						<span className="note">Выбрать другой язык:</span>
+						<span className="note">{t('form.form_16')}</span>
 						<div className="buttons">
 							{translations(selectedLanguage)}
 						</div>
