@@ -320,7 +320,7 @@ ID этой записи: \`${id}\`
 							{translations(selectedLanguage)}
 						</div>
 					</section>
-					<section className="success ok">
+					<section className="success">
 						<div className="box">
 							<span>Заявка успешно отправлена.</span>
 							<span>В скором времени мы с вами свяжемся, пожалуйста ожидайте!</span>
