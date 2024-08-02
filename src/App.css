@@ -98,10 +98,6 @@ h2 {
 	background-color: var(--tg-theme-bg-color);
 }
 
-.dev {
-	--tg-theme-bg-color: #FFFFFF; /* bg_color */
-	--tg-theme-text-color: #000000; /* text_color */
-	--tg-theme-hint-color: rgb(0, 0, 0, 0.5); /* hint_color */
-	--tg-theme-button-text-color: #FFFFFF; /* button_text_color */
-	--tg-theme-button-color: #48B3A9; /* button_color */
+::-webkit-scrollbar {
+	display: none;
 }

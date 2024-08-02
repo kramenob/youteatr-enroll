@@ -1,34 +1,38 @@
 import React, { useEffect }	from 'react';
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import './i18n';
-import './App.css';
+import './i18n'
+import './App.css'
 
-import Enroll from './components/Enroll/Enroll';
+import Enroll from './components/Enroll/Enroll'
 
 function App() {
 	useEffect(() => {
-	  const tg = window.Telegram.WebApp;
-  
-	  // Function to set CSS variables based on the theme
-	  const setTheme = (themeParams) => {
-		console.log('Theme Params:', themeParams); // Проверяем, что содержится в themeParams
-		document.documentElement.style.setProperty('--tg-theme-bg-color', themeParams.bg_color);
-		document.documentElement.style.setProperty('--tg-theme-text-color', themeParams.text_color);
-		document.documentElement.style.setProperty('--tg-theme-hint-color', themeParams.hint_color);
-		document.documentElement.style.setProperty('--tg-theme-button-text-color', themeParams.button_text_color);
-		document.documentElement.style.setProperty('--tg-theme-button-color', themeParams.button_color);
-	  };
-  
-	  // Set initial theme
-	  setTheme(tg.themeParams);
-  
-	  // Update theme when it changes
-	  tg.onEvent('themeChanged', () => {
+		const tg = window.Telegram.WebApp
+
+		const setTheme = (themeParams) => {
+			const bg_color = themeParams.bg_color || '#FFFFFF'
+			const text_color = themeParams.text_color || '#000000'
+			const hint_color = themeParams.hint_color || 'rgb(0, 0, 0, 0.5)'
+			const button_text_color = themeParams.button_text_color || '#FFFFFF'
+			const button_color = themeParams.button_color || '#48B3A9'
+
+			document.documentElement.style.setProperty('--tg-theme-bg-color', bg_color);
+			document.documentElement.style.setProperty('--tg-theme-text-color', text_color);
+			document.documentElement.style.setProperty('--tg-theme-hint-color', hint_color);
+			document.documentElement.style.setProperty('--tg-theme-button-text-color', button_text_color);
+			document.documentElement.style.setProperty('--tg-theme-button-color', button_color);
+		};
+
+		// Set initial theme
 		setTheme(tg.themeParams);
-	  });
-  
-	  // Show the WebApp
-	  tg.ready();
+
+		// Update theme when it changes
+		tg.onEvent('themeChanged', () => {
+		setTheme(tg.themeParams);
+		});
+
+		// Show the WebApp
+		tg.ready();
 	}, []);
 
 	return (
