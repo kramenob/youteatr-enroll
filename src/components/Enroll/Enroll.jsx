@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Helmet } from 'react-helmet';
 
@@ -6,7 +6,54 @@ import "./Enroll.css"
 
 function Enroll(props) {
 	const { t, i18n } = useTranslation()
-	i18n.changeLanguage(props.lang)
+	const [selectedLanguage, setSelectedLanguage] = useState(i18n.language)
+	
+	useEffect(() => {
+		if (props.lang) {
+		  i18n.changeLanguage(props.lang);
+		  setSelectedLanguage(props.lang);
+		}
+	  }, [props.lang, i18n]);
+	
+	useEffect(() => {
+		const handleLanguageChange = () => {
+		  setSelectedLanguage(i18n.language);
+		};
+		i18n.on('languageChanged', handleLanguageChange);
+		return () => {
+		  i18n.off('languageChanged', handleLanguageChange);
+		};
+	}, [i18n]);
+	
+	const chooseLanguage = (e) => {
+		e.preventDefault();
+		i18n.changeLanguage(e.target.value); // i18n.changeLanguage() is used to change the language assigned to lng in i18n.js file.
+		setSelectedLanguage(e.target.value);
+	}
+	const translations = (lng) => {
+		if (lng === "en") {
+			return (
+				<>
+					<button className='no-select' value="sl" onClick={chooseLanguage}>SLV</button>
+					<button className='no-select' value="ru" onClick={chooseLanguage}>RUS</button>
+				</>
+			)
+		} else if (lng === "ru") {
+			return (
+				<>
+					<button className='no-select' value="sl" onClick={chooseLanguage}>SLV</button>
+					<button className='no-select' value="en" onClick={chooseLanguage}>ENG</button>
+				</>
+			)
+		} else if (lng === "sl") {
+			return (
+				<>
+					<button className='no-select' value="ru" onClick={chooseLanguage}>RUS</button>
+					<button className='no-select' value="en" onClick={chooseLanguage}>ENG</button>
+				</>
+			)
+		}
+	}
 
 	const
 		telegramBotToken = process.env.REACT_APP_TELEGRAM_BOT_TOKEN,
@@ -64,8 +111,6 @@ ID этой записи: \`${id}\`
 	}
 
 	const fullFormMode = () => {
-		let form = document.querySelector(".form")
-		let form__content = document.querySelector(".form__content")
 		let res = true
 
 		if (parentName.current.value.length < 2) {
@@ -87,11 +132,6 @@ ID этой записи: \`${id}\`
 			alert(t("form.form_14"));
 			res = false
 		}
-		
-		form.classList.add("offset")
-		form__content.classList.add("mob-show")
-		
-
 		return res
 	}
 
@@ -132,6 +172,7 @@ ID этой записи: \`${id}\`
 	return (
 		<>
 			<Helmet>
+				<html lang={props.lang} />
 				<title>{t('title')}</title>
 				<meta name="description" content={t('description')} />
 			</Helmet>
@@ -233,6 +274,13 @@ ID этой записи: \`${id}\`
 							<span className="form__notice mob-form-hidden">{t("form.form_8")}</span>
 						</div>
 					</form>
+					<hr className="devider" />
+					<section className="language-switcher">
+						<span className="note">Выбрать другой язык:</span>
+						<div className="buttons">
+							{translations(selectedLanguage)}
+						</div>
+					</section>
 			</div>
 		</>
 	)
