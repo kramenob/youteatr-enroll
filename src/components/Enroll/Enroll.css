@@ -64,6 +64,39 @@
 	border: 1px var(--c-two) solid;
 	border-radius: 8px;
 }
+.form__label_checkbox {
+	cursor: pointer;
+
+	display: grid;
+	grid-template-columns: min-content auto;
+	grid-template-rows: 1fr;
+	grid-column-gap: 16px;
+	grid-row-gap: 0px;
+
+
+}
+.direction__info {
+	display: grid;
+	grid-auto-rows: auto;
+	grid-row-gap: 2px;
+}
+.direction__head {
+	display: flex;
+	justify-content: space-between;
+}
+.form__checkbox {
+	display: none;
+}
+.form__label_checkbox:before {
+	margin-top: 4.5px;
+	width: 17px;
+}
+.form__checkbox + .form__label_checkbox:before {
+	content: url(./img/checkbox_false.svg);
+}
+.form__checkbox:checked + .form__label_checkbox:before {
+	content: url(./img/checkbox_true.svg);
+}
 .form__label.req {
 	margin-bottom: 20px;
 	border: 1px var(--tg-theme-destructive-text-color) solid;

@@ -73,6 +73,19 @@ h2 {
 	line-height: 42px;
 	font-weight: 400;
 }
+.t_uppercase {
+	text-transform: uppercase;
+}
+.t {
+	font-size: 16px;
+	line-height: 120%;
+}
+.t_small {
+	font-size: 12px;
+}
+.t_large {
+	font-size: 20px;
+}
 
 .wrapper { /* page body */
 	display: grid;

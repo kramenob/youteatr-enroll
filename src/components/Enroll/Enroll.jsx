@@ -6,6 +6,9 @@ import { Helmet } from 'react-helmet';
 
 import "./Enroll.css"
 
+import "./img/checkbox_false.svg"
+import "./img/checkbox_true.svg"
+
 const content = (content) => css`
   &.req::after {
     content: '${content}';
@@ -69,7 +72,7 @@ function Enroll(props) {
 			)
 		}
 	}
-
+	
 	const
 		telegramBotToken = process.env.REACT_APP_TELEGRAM_BOT_TOKEN,
 		telegramChatId = process.env.REACT_APP_TELEGRAM_CHAT_ID,
@@ -79,7 +82,11 @@ function Enroll(props) {
 		eMail = useRef(null),
 		phone = useRef(null),
 		childName = useRef(null),
-		childAge = useRef(null)
+		childAge = useRef(null),
+
+		directionOne = useRef(null),
+		directionTwo = useRef(null),
+		directionThree = useRef(null)
 
 	const send = () => {
 
@@ -88,6 +95,21 @@ function Enroll(props) {
 		if (c) {
 			let id = generateId();
 			let now = generateNow();
+
+			let directions = []
+			if (directionOne.current.checked && directionTwo.current.checked && directionThree.current.checked) {
+				directions.push("Полный курс")
+			} else {
+				if (directionOne.current.checked) {
+					directions.push(`\nУршулу \`(Актерское мастерство, Сценическое движение, Сценическая речь)\``)
+				}
+				if (directionTwo.current.checked) {
+					directions.push(`\nДавида \`(Театральное пение, Мюзикл, Вокал)\``)
+				}
+				if (directionThree.current.checked) {
+					directions.push(`\nМарию \`(Кукольный театр, Кукольная анимация голоса и тела)\``)
+				}
+			}
 
 			let message =
 				`
@@ -98,6 +120,8 @@ function Enroll(props) {
 *Телефон:* \`${phone.current.value}\`
 *Имя ребёнка:* \`${childName.current.value}\`
 *Возраст ребёнка:* \`${childAge.current.value}\`
+
+*Запись на:* ${directions}
 
 ID этой записи: \`${id}\`
 				`
@@ -307,6 +331,71 @@ ID этой записи: \`${id}\`
 									maxLength="2"
 								/>
 							</label>
+
+							<span className='t'>{t('form.form_19')}</span>
+
+							<input
+										ref={directionOne}
+										type="checkbox"
+
+										id="direction-one"
+										className="form__checkbox"
+
+										name="direction-one"
+									/>
+							<label className={`form__label form__label_checkbox`} id="for-direction-one" for="direction-one">
+								<div className="direction__info">
+									<div className="direction__head">
+										<span className='t_uppercase'>{t('form.form_20')} 1</span>
+										<span>80 {t('form.form_21')}</span>
+									</div>
+									<div className="direction__description">
+										<p className="t t_small">{t('form.form_22')}</p>
+									</div>
+								</div>
+							</label>
+
+							<input
+										ref={directionTwo}
+										type="checkbox"
+
+										id="direction-two"
+										className="form__checkbox"
+
+										name="direction-two"
+									/>
+							<label className={`form__label form__label_checkbox`} id="for-direction-two" for="direction-two">
+								<div className="direction__info">
+									<div className="direction__head">
+										<span className='t_uppercase'>{t('form.form_20')} 2</span>
+										<span>60 {t('form.form_21')}</span>
+									</div>
+									<div className="direction__description">
+										<p className="t t_small">{t('form.form_23')}</p>
+									</div>
+								</div>
+							</label>
+
+							<input
+								ref={directionThree}
+								type="checkbox"
+
+								id="direction-three"
+								className="form__checkbox"
+
+								name="direction-three"
+							/>
+							<label className={`form__label form__label_checkbox`} id="for-direction-three" for="direction-three">
+								<div className="direction__info">
+									<div className="direction__head">
+										<span className='t t_uppercase'>{t('form.form_20')} 3</span>
+										<span className='t'>60 {t('form.form_21')}</span>
+									</div>
+									<div className="direction__description">
+										<p className="t t_small">{t('form.form_24')}</p>
+									</div>
+								</div>
+							</label>
 						</div>
 						<div className="grid form_submit">
 							<button className="form__button no-select" type="submit">{t("form.form_7")}</button>
@@ -322,8 +411,8 @@ ID этой записи: \`${id}\`
 					</section>
 					<section className="success">
 						<div className="box">
-							<span>Заявка успешно отправлена.</span>
-							<span>В скором времени мы с вами свяжемся, пожалуйста ожидайте!</span>
+							<span>{t('form.form_17')}</span>
+							<span>{t('form.form_18')}</span>
 						</div>
 					</section>
 			</div>
