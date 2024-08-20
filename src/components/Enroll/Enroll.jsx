@@ -71,8 +71,8 @@ function Enroll(props) {
 	}
 	
 	const
-		telegramBotToken = "7519172361:AAG5Pwv9MFuCYYrU5dnVYQ09jiTfxcd_Bzk", // process.env.REACT_APP_TELEGRAM_BOT_TOKEN,
-		telegramChatId = -1002215352460, // process.env.REACT_APP_TELEGRAM_CHAT_ID,
+		telegramBotToken = process.env.REACT_APP_TELEGRAM_BOT_TOKEN,
+		telegramChatId = process.env.REACT_APP_TELEGRAM_CHAT_ID,
 		url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?parse_mode=Markdown`,
 		
 		parentName = useRef(null),
@@ -345,8 +345,8 @@ ID этой записи: \`${id}\`
 							<label className={`form__label form__label_checkbox`} id="for-direction-one" for="direction-one">
 								<div className="direction__info">
 									<div className="direction__head">
-										<span className='t_uppercase'>{t('form.form_20')} 1</span>
-										<span>80 {t('form.form_21')}</span>
+										<span className='t t_uppercase'>{t('form.form_20')} 1</span>
+										<span className='t'>80 {t('form.form_21')}</span>
 									</div>
 									<div className="direction__description">
 										<p className="t t_small">{t('form.form_22')}</p>
@@ -366,8 +366,8 @@ ID этой записи: \`${id}\`
 							<label className={`form__label form__label_checkbox`} id="for-direction-two" for="direction-two">
 								<div className="direction__info">
 									<div className="direction__head">
-										<span className='t_uppercase'>{t('form.form_20')} 2</span>
-										<span>60 {t('form.form_21')}</span>
+										<span className='t t_uppercase'>{t('form.form_20')} 2</span>
+										<span className='t'>60 {t('form.form_21')}</span>
 									</div>
 									<div className="direction__description">
 										<p className="t t_small">{t('form.form_23')}</p>
