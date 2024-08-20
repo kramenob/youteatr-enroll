@@ -6,9 +6,6 @@ import { Helmet } from 'react-helmet';
 
 import "./Enroll.css"
 
-import "./img/checkbox_false.svg"
-import "./img/checkbox_true.svg"
-
 const content = (content) => css`
   &.req::after {
     content: '${content}';
@@ -74,8 +71,8 @@ function Enroll(props) {
 	}
 	
 	const
-		telegramBotToken = process.env.REACT_APP_TELEGRAM_BOT_TOKEN,
-		telegramChatId = process.env.REACT_APP_TELEGRAM_CHAT_ID,
+		telegramBotToken = "7519172361:AAG5Pwv9MFuCYYrU5dnVYQ09jiTfxcd_Bzk", // process.env.REACT_APP_TELEGRAM_BOT_TOKEN,
+		telegramChatId = -1002215352460, // process.env.REACT_APP_TELEGRAM_CHAT_ID,
 		url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?parse_mode=Markdown`,
 		
 		parentName = useRef(null),
@@ -342,6 +339,8 @@ ID этой записи: \`${id}\`
 										className="form__checkbox"
 
 										name="direction-one"
+
+										checked
 									/>
 							<label className={`form__label form__label_checkbox`} id="for-direction-one" for="direction-one">
 								<div className="direction__info">
