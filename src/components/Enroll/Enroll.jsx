@@ -213,7 +213,9 @@ ID этой записи: \`${id}\`
 	const checkPhone = () => {
 		let res
 		// eslint-disable-next-line
-		if (phone.current.value.match(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/)) {
+		// if (phone.current.value.match(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/)) {
+		// 	res = false
+		if (phone.current.value.length > 5) {
 			res = false
 		} else {
 			res = true
