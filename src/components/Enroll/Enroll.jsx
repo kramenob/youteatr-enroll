@@ -193,7 +193,7 @@ ID этой записи: \`${id}\`
 			newErrors.childAge = false;
 		}
 		
-		if (!(childAge.current.value >= 7 && childAge.current.value <= 15)) {
+		if (!(childAge.current.value >= 5 && childAge.current.value <= 15)) {
 			newErrors.childAge = true;
 			res = false
 		} else {
