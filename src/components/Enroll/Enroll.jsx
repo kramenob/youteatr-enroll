@@ -16,11 +16,8 @@ function Enroll(props) {
 	const { t, i18n } = useTranslation()
 	const [selectedLanguage, setSelectedLanguage] = useState(i18n.language)
 	const [errors, setErrors] = useState({
-		parentName: false,
 		email: false,
 		phone: false,
-		childName: false,
-		childAge: false,
 	});
 
 	useEffect(() => {
@@ -75,15 +72,8 @@ function Enroll(props) {
 		telegramChatId = process.env.REACT_APP_TELEGRAM_CHAT_ID,
 		url = `https://api.telegram.org/bot${telegramBotToken}/sendMessage?parse_mode=Markdown`,
 		
-		parentName = useRef(null),
 		eMail = useRef(null),
-		phone = useRef(null),
-		childName = useRef(null),
-		childAge = useRef(null),
-
-		directionOne = useRef(null),
-		directionTwo = useRef(null),
-		directionThree = useRef(null)
+		phone = useRef(null);
 
 	const send = () => {
 
@@ -93,32 +83,13 @@ function Enroll(props) {
 			let id = generateId();
 			let now = generateNow();
 
-			let directions = []
-			if (directionOne.current.checked && directionTwo.current.checked && directionThree.current.checked) {
-				directions.push("Полный курс")
-			} else {
-				if (directionOne.current.checked) {
-					directions.push(`\nУршулу \`(Актерское мастерство, Сценическое движение, Сценическая речь)\``)
-				}
-				if (directionTwo.current.checked) {
-					directions.push(`\nДавида \`(Театральное пение, Мюзикл, Вокал)\``)
-				}
-				if (directionThree.current.checked) {
-					directions.push(`\nМарию \`(Кукольный театр, Кукольная анимация голоса и тела)\``)
-				}
-			}
-
 			let message =
 				`
 *ЗАПИСЬ НА КУРС от ${now}*
 
-*Имя родителя:* \`${parentName.current.value}\`
 *E-Mail:* \`${eMail.current.value}\`
 *Телефон:* \`${phone.current.value}\`
-*Имя ребёнка:* \`${childName.current.value}\`
-*Возраст ребёнка:* \`${childAge.current.value}\`
 
-*Запись на:* ${directions}
 
 ID этой записи: \`${id}\`
 				`
@@ -152,19 +123,10 @@ ID этой записи: \`${id}\`
 		let res = true
 
 		const newErrors = {
-			parentName: false,
 			email: false,
 			phone: false,
-			childName: false,
-			childAge: false,
 		};
 
-		if (parentName.current.value.length < 2) {
-			newErrors.parentName = true;
-			res = false
-		} else {
-			newErrors.parentName = false;
-		}
 		if (emailTest()) {
 			newErrors.email = true;
 			res = false
@@ -178,27 +140,7 @@ ID этой записи: \`${id}\`
 		} else {
 			newErrors.phone = false;
 		}
-
-		if (childName.current.value.length < 2) {
-			newErrors.childName = true;
-			res = false
-		} else {
-			newErrors.childName = false;
-		}
-
-		if (childAge.current.value < 1) {
-			newErrors.childAge = true;
-			res = false
-		} else {
-			newErrors.childAge = false;
-		}
 		
-		if (!(childAge.current.value >= 5 && childAge.current.value <= 15)) {
-			newErrors.childAge = true;
-			res = false
-		} else {
-			newErrors.childAge = false;
-		}
 
 		setErrors(newErrors);
 		
@@ -255,21 +197,6 @@ ID этой записи: \`${id}\`
 						}}>
 						<span className="form_title" color="text">{t("form.form_1")}</span>
 						<div className="grid form__inputs">
-							<label className={`form__label ${errors.parentName ? 'req' : ''}`} css={content(t("form.form_9"))} id="for-parent-name">
-								<input
-									ref={parentName}
-									type="text"
-
-									id="parent-name"
-									className="form__input"
-
-									name="parent-name"
-									placeholder={t("form.form_2")}
-
-									minLength="1"
-									maxLength="20"
-								/>
-							</label>
 							<label className={`form__label ${errors.email ? 'req' : ''}`} css={content(t("form.form_10"))} id="for-email">
 								<input
 									ref={eMail}
@@ -299,103 +226,6 @@ ID этой записи: \`${id}\`
 									minLength="1"
 									maxLength="20"
 								/>
-							</label>
-							<label className={`form__label ${errors.childName ? 'req' : ''}`} css={content(t("form.form_12"))} id="for-child-name">
-								<input
-									ref={childName}
-									type="text"
-
-									id="child-name"
-									className="form__input"
-
-									name="child-name"
-									placeholder={t("form.form_5")}
-
-									minLength="1"
-									maxLength="20"
-								/>
-							</label>
-							<label className={`form__label ${errors.childAge ? 'req' : ''}`} css={content(t("form.form_13"))} id="for-child-age">
-								<input
-									ref={childAge}
-									type="number"
-
-									id="child-age"
-									className="form__input"
-
-									name="child-age"
-									placeholder={t("form.form_6")}
-
-									minLength="1"
-									maxLength="2"
-								/>
-							</label>
-
-							<span className='t'>{t('form.form_19')}</span>
-
-							<input
-										ref={directionOne}
-										type="checkbox"
-
-										id="direction-one"
-										className="form__checkbox"
-
-										name="direction-one"
-
-										checked
-									/>
-							<label className={`form__label form__label_checkbox`} id="for-direction-one" for="direction-one">
-								<div className="direction__info">
-									<div className="direction__head">
-										<span className='t t_uppercase'>{t('form.form_20')} 1</span>
-										<span className='t'>80 {t('form.form_21')}</span>
-									</div>
-									<div className="direction__description">
-										<p className="t t_small">{t('form.form_22')}</p>
-									</div>
-								</div>
-							</label>
-
-							<input
-										ref={directionTwo}
-										type="checkbox"
-
-										id="direction-two"
-										className="form__checkbox"
-
-										name="direction-two"
-									/>
-							<label className={`form__label form__label_checkbox`} id="for-direction-two" for="direction-two">
-								<div className="direction__info">
-									<div className="direction__head">
-										<span className='t t_uppercase'>{t('form.form_20')} 2</span>
-										<span className='t'>60 {t('form.form_21')}</span>
-									</div>
-									<div className="direction__description">
-										<p className="t t_small">{t('form.form_23')}</p>
-									</div>
-								</div>
-							</label>
-
-							<input
-								ref={directionThree}
-								type="checkbox"
-
-								id="direction-three"
-								className="form__checkbox"
-
-								name="direction-three"
-							/>
-							<label className={`form__label form__label_checkbox`} id="for-direction-three" for="direction-three">
-								<div className="direction__info">
-									<div className="direction__head">
-										<span className='t t_uppercase'>{t('form.form_20')} 3</span>
-										<span className='t'>60 {t('form.form_21')}</span>
-									</div>
-									<div className="direction__description">
-										<p className="t t_small">{t('form.form_24')}</p>
-									</div>
-								</div>
 							</label>
 						</div>
 						<div className="grid form_submit">
